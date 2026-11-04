@@ -1,0 +1,663 @@
+:root {
+    --color-principal: #47B1B3;
+    --color-principal-claro: #A4D9DA;
+    --color-principal-oscuro: #255D5E;
+
+    --color-acento: #9E1B4A;
+    --color-acento-claro: #F7E4E9;
+
+    --color-oscuro: #1C1917;
+    --color-claro: #FDFDFC;
+    --color-logo: #404040;
+
+    --color-gris: #D7D8D9;
+    --color-gris-oscuro: #6B6B6B;
+    --color-gris-claro: #F8F9FA;
+
+    --color-beige: #F8F5EE;
+    --color-beige-oscuro: #EFECE4;
+    --color-beige-claro: #FFFCF5;
+
+    --color-verde: #356F40;
+    --color-verde-claro: #E3F1E5;
+
+    --color-naranja: #985027;
+    --color-naranja-claro: #FBF0E6;
+
+    --color-azul: #28596B;
+    --color-azul-claro: #E4F0F3;
+
+    --color-violeta: #594875;
+    --color-violeta-claro: #F0ECF5;
+
+    --color-amarillo-claro: #F5EDDA;
+    --color-amarillo: #80652B;
+
+    --color-rosa-claro: #F3E3E9;
+    --color-rosa: #873B55;
+
+    --color-turquesa: #286663;
+    --color-turquesa-claro: #E0F1EF;
+}
+
+
+/* CONFIGURACIÓN GENERAL */
+
+.ocultar-estadisticas-init #seccionEstadisticas {
+    display: none !important;
+}
+
+#panelFiltros.filtros-ocultos-init {
+    display: none;
+}
+
+body {
+    background-color: var(--color-beige);
+}
+
+h1 {
+    color: var(--color-oscuro);
+}
+
+
+/* MENÚ DE ADMINISTRACIÓN */
+
+.menu-admin,
+.offcanvas,
+.offcanvas-header,
+.offcanvas-body,
+.form-control,
+.form-select {
+    background-color: var(--color-claro) !important;
+}
+
+div.menu-admin {
+    width: 260px;
+    min-width: 220px;
+}
+
+.icono-menu {
+    width: 36px;
+    height: 36px;
+}
+
+.switch-admin,
+div.filtros-admin {
+    height: 38px;
+}
+
+.switch-admin-cursor {
+    cursor: pointer;
+}
+
+.filtros-admin {
+    font-size: 0.9rem;
+}
+
+.linea-degradado {
+    opacity: 1;
+    background: linear-gradient(
+            to right,
+            transparent 1%,
+            var(--color-gris),
+            transparent 99%
+    );
+    height: 1px;
+    border: 0;
+}
+
+.fondo-item-menu:hover {
+    background-color: var(--color-principal-claro);
+    border-radius: 4px;
+}
+
+.fondo-item-menu:hover .nav-link {
+    font-weight: bold;
+}
+
+.fondo-selec-item-menu {
+    background-color: var(--color-principal);
+    color: var(--color-claro);
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.fondo-selec-item-menu:hover .nav-link {
+    color: var(--color-logo);
+}
+
+.nav-link {
+    transition: none;
+}
+
+
+/* BOTONES Y COLORES */
+
+.color-acento {
+    background-color: var(--color-acento);
+    color: var(--color-claro);
+}
+
+button.color-acento:hover {
+    background-color: var(--color-acento-claro);
+    color: var(--color-acento);
+    border: 1px solid var(--color-gris);
+}
+
+.color-suave {
+    background-color: var(--color-beige-oscuro);
+    color: var(--color-oscuro);
+}
+
+.color-suave:hover {
+    background-color: var(--color-claro);
+    border: 1px solid var(--color-gris);
+}
+
+.botones-accion,
+.botones-accion-eliminar {
+    background-color: var(--color-gris-claro);
+}
+
+.botones-accion:hover {
+    background-color: var(--color-gris);
+}
+
+.botones-accion-eliminar:hover {
+    background-color: var(--color-acento-claro);
+}
+
+.borde-controles-form {
+    border: 1px solid var(--color-gris);
+}
+
+.tarjetas-color-claro {
+    background-color: var(--color-claro);
+}
+
+
+/* IMÁGENES Y ENLACES */
+
+.imagen-tabla {
+    opacity: 0.75;
+    transition: opacity 0.3s ease;
+}
+
+.imagen-tabla:hover {
+    opacity: 1;
+}
+
+.imagen-animal-tabla {
+    width: 40px;
+    height: 40px;
+}
+
+.icono-animal-tabla {
+    width: 20px;
+    height: 20px;
+}
+
+.icono-animal-tabla-mini {
+    width: 18px;
+    height: 18px;
+}
+
+.enlace-volver {
+    color: var(--color-principal);
+}
+
+
+/* BADGES */
+
+.badge-suave {
+    border: 1px solid var(--color-gris-claro);
+    color: var(--color-gris-oscuro);
+}
+
+.badge-normal {
+    border: 1px solid var(--color-verde-claro);
+    color: var(--color-verde);
+}
+
+.badge-resaltado {
+    background-color: var(--color-acento-claro);
+    color: var(--color-acento);
+}
+
+.badge-resaltado-oscuro {
+    border: 1px solid var(--color-acento-claro);
+    color: var(--color-logo);
+}
+
+.badge-naranja {
+    background-color: var(--color-gris-claro);
+    color: var(--color-naranja);
+    border: 1px solid var(--color-naranja-claro);
+}
+
+.badge-verde {
+    background-color: var(--color-gris-claro);
+    color: var(--color-verde);
+    border: 1px solid var(--color-verde-claro);
+}
+
+.badge-azul {
+    background-color: var(--color-gris-claro);
+    color: var(--color-azul);
+    border: 1px solid var(--color-azul-claro);
+}
+
+.badge-violeta {
+    background-color: var(--color-gris-claro);
+    color: var(--color-violeta);
+    border: 1px solid var(--color-violeta-claro);
+}
+
+.badge-amarillo {
+    background-color: var(--color-gris-claro);
+    color: var(--color-amarillo);
+    border: 1px solid var(--color-amarillo-claro);
+}
+
+.badge-rosa {
+    border: 1px solid var(--color-rosa-claro);
+    color: var(--color-rosa);
+    background-color: var(--color-gris-claro);
+}
+
+.badge-turquesa {
+    background-color: var(--color-gris-claro);
+    color: var(--color-turquesa);
+    border: 1px solid var(--color-turquesa-claro);
+}
+
+
+/* FORMULARIOS */
+
+.btn-close:focus,
+.form-control:focus,
+.form-select:focus,
+.form-check-input:focus {
+    border-color: #6c757d;
+    box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.25);
+    outline: 0;
+}
+
+.form-check-input:checked {
+    background-color: #9E1B4A;
+    border-color: #9E1B4A;
+}
+
+.form-switch .form-check-input:not(:checked) {
+    background-color: #f1e3e8 !important;
+}
+
+.form-check-input:checked:focus {
+    border-color: #9E1B4A;
+    box-shadow: 0 0 0 0.2rem rgba(158, 27, 74, 0.25);
+}
+
+.form-switch .form-check-input:focus:not(:checked) {
+    --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%239E1B4A'/%3e%3c/svg%3e");
+}
+
+.form-switch .form-check-input:checked,
+.form-switch .form-check-input:checked:focus,
+.form-switch .form-check-input:checked:active,
+.form-switch .form-check-input:checked:disabled {
+    background-color: #9E1B4A !important;
+    border-color: #9E1B4A !important;
+}
+
+
+/* SIMPLE-DATATABLES: TABLAS */
+
+.table,
+.datatable-table {
+    font-size: 0.9rem;
+}
+
+/* Contenedor */
+
+.datatable-wrapper .datatable-container {
+    background-color: var(--color-beige) !important;
+    border: 1px solid var(--color-gris);
+    border-radius: 1rem;
+    overflow-x: auto;
+    overflow-y: auto;
+    height: auto;
+    max-height: 70vh;
+}
+
+/* Tabla */
+
+.datatable-wrapper .datatable-table {
+    width: 100% !important;
+    table-layout: auto !important;
+    margin-bottom: 0;
+    font-size: 0.9rem;
+}
+
+/* Celdas */
+
+.datatable-wrapper .datatable-table th,
+.datatable-wrapper .datatable-table td {
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+
+/* Cabecera */
+
+.datatable-wrapper .datatable-table > thead > tr > th {
+    background: var(--color-beige-oscuro) !important;
+    padding: 1.2rem 0.6rem !important;
+    line-height: 1.2;
+    vertical-align: middle !important;
+    border-top: 0;
+    transition: background-color 0.2s ease;
+}
+
+.datatable-wrapper .datatable-table > thead > tr > th:first-child {
+    padding-left: 1.25rem !important;
+}
+
+.datatable-wrapper .datatable-table > thead > tr > th:last-child {
+    padding-right: 1.25rem !important;
+}
+
+.datatable-wrapper .datatable-table > thead > tr > th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    box-shadow: inset 0 -1px 0 var(--color-gris);
+}
+
+/* Ordenación por columnas */
+
+.datatable-wrapper .datatable-table > thead > tr > th .datatable-sorter {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    width: auto !important;
+    max-width: 100%;
+    margin: 0;
+    padding: 0 !important;
+    border: 0;
+    background: none;
+    font: inherit;
+    letter-spacing: inherit;
+    text-align: left;
+    line-height: inherit;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Indicador de ordenación */
+
+.datatable-wrapper .datatable-sorter::before {
+    content: none !important;
+}
+
+.datatable-wrapper .datatable-sorter::after {
+    content: "▲";
+    position: static !important;
+    transform: none !important;
+    margin-left: 0.6rem !important;
+    margin-right: 0 !important;
+    flex-shrink: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    text-align: left;
+    font-size: 0.7rem;
+    line-height: 1;
+    opacity: 0;
+    border: 0 !important;
+    background: none !important;
+}
+
+/* Orden ascendente */
+
+.datatable-wrapper th[aria-sort="ascending"] .datatable-sorter::after,
+.datatable-wrapper th.datatable-ascending .datatable-sorter::after {
+    content: "▲";
+    opacity: 1 !important;
+}
+
+/* Orden descendente */
+
+.datatable-wrapper th[aria-sort="descending"] .datatable-sorter::after,
+.datatable-wrapper th.datatable-descending .datatable-sorter::after {
+    content: "▼";
+    opacity: 1 !important;
+}
+
+/* Hover */
+
+.datatable-wrapper .datatable-table > thead > tr > th:hover .datatable-sorter::after {
+    opacity: 0.5;
+}
+
+/* Filas */
+
+.datatable-wrapper .datatable-table > tbody > tr > td {
+    background: var(--color-claro);
+    padding: 0.8rem;
+}
+
+.datatable-wrapper .datatable-table > tbody > tr:last-child > td {
+    border-bottom: 0;
+}
+
+
+.datatable-wrapper .datatable-table > tbody > tr > td:first-child {
+    padding-left: 1.25rem !important;
+}
+
+
+.datatable-wrapper .datatable-table > tbody > tr > td:last-child {
+    padding-right: 1.25rem !important;
+}
+
+
+/* Tabla Animales en Admin */
+
+#tablaAnimalesAdmin {
+    width: 100%;
+}
+
+#tablaAnimalesAdmin th,
+#tablaAnimalesAdmin td {
+    vertical-align: middle;
+}
+
+/* Columna situación */
+
+.col-situacion {
+    min-width: 170px;
+    white-space: nowrap;
+}
+
+
+/* Paginación */
+
+.datatable-pagination ul {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    margin-bottom: 0;
+}
+
+.datatable-pagination li {
+    margin: 0 2px;
+}
+
+.datatable-pagination a,
+.datatable-pagination button {
+    display: block;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    color: var(--color-oscuro);
+    background-color: var(--color-claro);
+    border: 1px solid var(--color-gris);
+    border-radius: 0.375rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Página activa */
+
+.datatable-pagination li.datatable-active a,
+.datatable-pagination li.datatable-active button {
+    background-color: var(--color-acento);
+    border-color: var(--color-acento);
+    color: var(--color-claro);
+}
+
+/* Hover */
+
+.datatable-pagination a:hover,
+.datatable-pagination button:hover {
+    background-color: var(--color-claro);
+    border-color: var(--color-gris);
+    color: var(--color-acento);
+}
+
+.datatable-pagination li.datatable-active a:focus,
+.datatable-pagination li.datatable-active a:active,
+.datatable-pagination li.datatable-active a:hover,
+.datatable-pagination li.datatable-active button:focus,
+.datatable-pagination li.datatable-active button:active,
+.datatable-pagination li.datatable-active button:hover {
+    background-color: var(--color-acento);
+    border-color: var(--color-acento);
+    color: var(--color-claro);
+    outline: 0;
+    box-shadow: none;
+}
+
+/* Páginas deshabilitadas */
+
+.datatable-pagination li.datatable-disabled a,
+.datatable-pagination li.datatable-disabled button {
+    color: var(--color-gris-oscuro);
+    background-color: var(--color-beige-oscuro);
+    border-color: var(--color-gris);
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: default;
+}
+
+/* Accesibilidad */
+
+.datatable-pagination a:focus-visible,
+.datatable-pagination button:focus-visible {
+    outline: 2px solid var(--color-acento);
+    outline-offset: 2px;
+}
+
+/* Elementos de paginación */
+
+.datatable-pagination li.datatable-hidden {
+    display: list-item !important;
+    visibility: visible !important;
+}
+
+
+/* PIE DE TABLA */
+
+.datatable-bottom .datatable-dropdown,
+.datatable-bottom .datatable-info,
+.datatable-bottom .datatable-pagination {
+    margin: 0;
+    padding: 0;
+}
+
+.custom-dt-text,
+.datatable-info.custom-dt-text {
+    color: var(--color-gris-oscuro) !important;
+    font-size: 0.875rem;
+    font-family: inherit;
+}
+
+
+/* CARGA Y TRANSICIONES */
+
+.cargando-tabla tbody tr {
+    opacity: 0 !important;
+}
+
+.datatable-wrapper tbody tr {
+    opacity: 1;
+    transition: opacity 0.05s ease-in-out;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+
+    .datatable-wrapper .datatable-table {
+        width: max-content !important;
+        min-width: 100%;
+    }
+
+    .datatable-bottom {
+        row-gap: 0.75rem;
+    }
+
+    .datatable-bottom .datatable-info {
+        text-align: center;
+    }
+
+    .datatable-bottom .datatable-pagination {
+        justify-content: center;
+    }
+}
+
+/* EVITAR DESTELLO BLANCO AL CARGAR LA TABLA */
+
+/* Cabecera original y tabla generada */
+
+.cargando-tabla table > thead,
+.datatable-wrapper .datatable-table > thead {
+    background-color: var(--color-beige-oscuro) !important;
+}
+
+.cargando-tabla table > thead > tr > th,
+.datatable-wrapper .datatable-table > thead > tr > th,
+.datatable-wrapper .datatable-table > thead > tr > th .datatable-sorter {
+    background-color: var(--color-beige-oscuro) !important;
+    background: var(--color-beige-oscuro) !important;
+}
+
+/* Mantener el color durante la inicialización */
+
+.cargando-tabla table {
+    visibility: visible;
+}
+
+.cargando-tabla table > thead > tr > th {
+    background-color: var(--color-beige-oscuro) !important;
+}
+
+/* Tabla */
+
+.datatable-wrapper .datatable-bottom {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.datatable-wrapper .datatable-bottom .datatable-dropdown {
+    padding-left: 0 !important;
+}
+
+.datatable-wrapper .datatable-bottom .datatable-info {
+    padding-right: 0 !important;
+}

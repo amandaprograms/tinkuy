@@ -1,0 +1,392 @@
+
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: cabecera}"></head>
+<body>
+<div class="container-fluid min-vh-100 d-flex flex-column">
+
+    <div th:replace="~{fragments/adminMenu :: movil}"></div>
+
+    <div class="row flex-grow-1 flex-nowrap pt-md-0 pt-5">
+
+        <div class="col-auto px-0 border-end d-none d-md-block menu-admin">
+            <nav th:replace="~{fragments/adminMenu :: menu}"></nav>
+        </div>
+
+        <div class="col overflow-x-hidden">
+            <main class="py-4 px-3 px-md-4">
+
+                <header class="pb-4">
+                    <div class="row align-items-center g-3">
+                        <div class="col-12 col-sm-auto me-auto text-center text-sm-start p-3 p-sm-2">
+                            <span class="h2">Gestión de animales</span>
+                        </div>
+                        <div class="col-12 col-sm-auto d-flex justify-content-sm-end gap-2">
+                            <button id="btnToggleEstadisticas" class="btn color-suave w-100 w-sm-auto py-2 px-3 text-nowrap d-inline-flex align-items-center justify-content-center gap-2" type="button">
+                                <i class="bi bi-eye-slash" id="iconoEstadisticas"></i>
+                                <span id="textoEstadisticas">Estadísticas</span>
+                            </button>
+                            <button class="btn color-acento w-100 w-sm-auto py-2 px-3 text-nowrap" type="button"> + Nuevo animal</button>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- TARJETAS DE ESTADÍSTICAS -->
+                <section id="seccionEstadisticas" class="row mb-3 g-3">
+                    <div class="col-6 col-xl-3">
+                        <div class="d-flex flex-column flex-sm-row align-items-center justify-content-center justify-content-sm-start h-100 p-2 p-sm-3 rounded-4 borde-controles-form tarjetas-color-claro shadow-sm">
+                            <div class="d-flex align-items-center p-2 text-muted"><img th:src="@{/icons/animales_totales.svg}" alt="Icono Total animales"></div>
+                            <div class="d-flex flex-column ms-0 ms-sm-3 text-center text-sm-start">
+                                <div class="fw-bold h4 mb-0" th:text="${estadisticas.totalAnimales}">0</div>
+                                <div class="text-secondary small">Total animales</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-xl-3">
+                        <div class="d-flex flex-column flex-sm-row align-items-center justify-content-center justify-content-sm-start h-100 p-2 p-sm-3 rounded-4 borde-controles-form tarjetas-color-claro shadow-sm">
+                            <div class="d-flex align-items-center p-2 text-muted"><img th:src="@{/icons/urgentes.svg}" alt="Icono Urgentes"></div>
+                            <div class="d-flex flex-column ms-0 ms-sm-3 text-center text-sm-start">
+                                <div class="fw-bold h4 mb-0" th:text="${estadisticas.totalUrgentes}">0</div>
+                                <div class="text-secondary small">Urgentes</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-xl-3">
+                        <div class="d-flex flex-column flex-sm-row align-items-center justify-content-center justify-content-sm-start h-100 p-2 p-sm-3 rounded-4 borde-controles-form tarjetas-color-claro shadow-sm">
+                            <div class="d-flex align-items-center p-2 text-muted"><img th:src="@{/icons/en_adopcion.svg}" alt="Icono En adopción"></div>
+                            <div class="d-flex flex-column ms-0 ms-sm-3 text-center text-sm-start">
+                                <div class="fw-bold h4 mb-0" th:text="${estadisticas.totalEnAdopcion}">0</div>
+                                <div class="text-secondary small">En adopción</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-xl-3">
+                        <div class="d-flex flex-column flex-sm-row align-items-center justify-content-center justify-content-sm-start h-100 p-2 p-sm-3 rounded-4 borde-controles-form tarjetas-color-claro shadow-sm">
+                            <div class="d-flex align-items-center p-2 text-muted"><img th:src="@{/icons/adoptados.svg}" alt="Icono Adoptados"></div>
+                            <div class="d-flex flex-column ms-0 ms-sm-3 text-center text-sm-start">
+                                <div class="fw-bold h4 mb-0" th:text="${estadisticas.totalAdoptados}">0</div>
+                                <div class="text-secondary small">Adoptados</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="mt-3 p-3 rounded shadow-sm border">
+
+                    <form method="post"
+                          th:action="@{/animales/filtros}"
+                          th:object="${animalesFiltroDto}"
+                          class="mb-0">
+
+                        <!-- BARRA SUPERIOR: BUSCADOR Y BOTÓN DE FILTROS -->
+                        <div class="d-flex flex-column flex-sm-row align-items-stretch align-items-sm-center justify-content-between gap-2">
+
+                            <div class="buscador-filtros-admin">
+                                <div class="input-group borde-controles-form rounded shadow-sm">
+                                    <span class="input-group-text border-0">
+                                        <i class="bi bi-search"></i>
+                                    </span>
+                                    <input type="search"
+                                           id="buscadorExterno"
+                                           class="form-control border-0 shadow-none filtros-admin"
+                                           placeholder="Buscar..."
+                                           aria-label="Buscar en la tabla">
+                                </div>
+                            </div>
+
+                            <button type="button"
+                                    class="btn color-suave d-inline-flex align-items-center justify-content-center gap-2"
+                                    id="btnToggleFiltros">
+                                <i class="bi bi-sliders"></i>
+                                <span>Filtros</span>
+                                <i class="bi bi-chevron-down" id="iconoFiltros"></i>
+                            </button>
+                        </div>
+
+                        <!-- PANEL DESPLEGABLE -->
+                        <div id="panelFiltros">
+                            <div class="pt-3 mt-3 border-top">
+
+                                <!-- PRIMERA FILA: SEIS FILTROS -->
+                                <div class="row g-3 align-items-end mb-3">
+
+                                    <div class="col-6 col-md-4 col-xxl-2">
+                                        <label for="situacion" class="form-label small text-muted fw-semibold">Situación</label>
+                                        <select class="form-select filtros-admin" id="situacion" th:field="*{situacion}">
+                                            <option value="">Todos</option>
+                                            <option th:each="sit : ${situaciones}"
+                                                    th:value="${sit.etiqueta}"
+                                                    th:text="${sit.etiqueta}">
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-6 col-md-4 col-xxl-2">
+                                        <label for="esterilizadoFiltro" class="form-label small text-muted fw-semibold">Esterilizado</label>
+                                        <select class="form-select filtros-admin" id="esterilizadoFiltro" th:field="*{esterilizado}">
+                                            <option value="">Todos</option>
+                                            <option value="true">Sí</option>
+                                            <option value="false">No</option>
+                                            <option value="DESCONOCIDO">Desconocido</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-6 col-md-4 col-xxl-2">
+                                        <label for="especieId" class="form-label small text-muted fw-semibold">Especie</label>
+                                        <select class="form-select filtros-admin" id="especieId" th:field="*{especieId}">
+                                            <option value="">Todos</option>
+                                            <option th:each="especie : ${especies}"
+                                                    th:value="${especie.id}"
+                                                    th:text="${especie.nombre}">
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-6 col-md-4 col-xxl-2">
+                                        <label for="edad" class="form-label small text-muted fw-semibold">Edad</label>
+                                        <select class="form-select filtros-admin" id="edad" th:field="*{edad}">
+                                            <option value="">Todos</option>
+                                            <option th:each="e : ${edades}"
+                                                    th:value="${e.name}"
+                                                    th:text="${e.etiqueta}">
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-6 col-md-4 col-xxl-2">
+                                        <label for="sexoFiltro" class="form-label small text-muted fw-semibold">Sexo</label>
+                                        <select class="form-select filtros-admin" id="sexoFiltro" th:field="*{sexo}">
+                                            <option value="">Todos</option>
+                                            <option th:each="s : ${sexos}"
+                                                    th:value="${s.name()}"
+                                                    th:text="${s.etiqueta}">
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-6 col-md-4 col-xxl-2">
+                                        <label for="tamano" class="form-label small text-muted fw-semibold">Tamaño</label>
+                                        <select class="form-select filtros-admin" id="tamano" th:field="*{tamano}">
+                                            <option value="">Todos</option>
+                                            <option th:each="t : ${tamanos}"
+                                                    th:value="${t.name}"
+                                                    th:text="${t.etiqueta}">
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- SEGUNDA FILA: ESTADO, PPP, URGENTES Y ACCIONES -->
+                                <div class="row g-3 align-items-end">
+
+                                    <div class="col-6 col-md-4 col-xxl-2">
+                                        <label for="estado" class="form-label small text-muted fw-semibold">Estado</label>
+                                        <select class="form-select filtros-admin" id="estado" th:field="*{estado}">
+                                            <option value="">Todos</option>
+                                            <option th:each="estado : ${estados}"
+                                                    th:value="${estado.etiqueta}"
+                                                    th:text="${estado.etiqueta}">
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-6 col-md-4 col-xxl-2">
+                                        <label for="ppp" class="form-label small text-muted fw-semibold mb-1 d-block">Sólo PPP</label>
+                                        <div class="form-check form-switch ps-0 mb-1 d-flex align-items-center switch-admin">
+                                            <input class="form-check-input ms-0 switch-admin-cursor"
+                                                   type="checkbox" role="switch" id="ppp" th:field="*{ppp}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6 col-md-4 col-xxl-2">
+                                        <label for="urgente" class="form-label small text-muted fw-semibold mb-1 d-block">Sólo urgentes</label>
+                                        <div class="form-check form-switch ps-0 mb-1 d-flex align-items-center switch-admin">
+                                            <input class="form-check-input ms-0 switch-admin-cursor"
+                                                   type="checkbox" role="switch" id="urgente" th:field="*{urgente}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-xxl-6">
+                                        <div class="d-flex justify-content-center justify-content-xxl-end gap-2">
+                                            <button type="submit" class="btn color-acento" title="Filtrar" aria-label="Filtrar">
+                                                <i class="bi bi-funnel"></i>
+                                            </button>
+                                            <a th:href="@{/animales/}" class="btn color-suave" title="Reiniciar filtros" aria-label="Reiniciar filtros">
+                                                <i class="bi bi-arrow-counterclockwise"></i>
+                                            </a>
+                                            <a th:href="@{/animales/sinfiltros}" class="btn color-suave" title="Limpiar filtros" aria-label="Limpiar filtros">
+                                                <i class="bi bi-eraser"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- TABLA DE DATATABLES -->
+                <section class="mt-3">
+                    <div class="table-responsive cargando-tabla">
+                        <table class="table align-middle" id="tablaAnimalesAdmin">
+                            <thead>
+                            <tr class="text-nowrap">
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Sexo</th>
+                                <th scope="col">Tamaño</th>
+                                <th scope="col">Edad</th>
+                                <th scope="col" class="text-center">Esterilizado</th>
+                                <th scope="col">Especie</th>
+                                <th scope="col" class="text-center">PPP</th>
+                                <th scope="col" class="text-center">Urgente</th>
+                                <th scope="col" class="col-situacion">Situación</th>
+                                <th scope="col" class="text-center"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="animal : ${animalesTablaDto}">
+
+                                <!-- 1. Nombre -->
+                                <td class="align-middle">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <img th:if="${animal.archivoUrl != null and !#strings.isEmpty(animal.archivoUrl)}"
+                                             th:src="@{/archivos/{img}(img=${animal.archivoUrl})}"
+                                             class="rounded-circle object-fit-cover shadow-sm border imagen-animal-tabla"
+                                             th:alt="${animal.textoAlt != null ? animal.textoAlt : 'Imagen del animal'}">
+                                        <img th:unless="${animal.archivoUrl != null and !#strings.isEmpty(animal.archivoUrl)}"
+                                             th:src="@{/images/default-animal.svg}"
+                                             class="rounded-circle object-fit-cover shadow-sm border imagen-animal-tabla"
+                                             alt="Imagen de animal genérica">
+                                        <span th:text="${animal.nombre}"></span>
+                                    </div>
+                                </td>
+
+                                <!-- 2. Estado -->
+                                <td class="align-middle">
+                                    <span class="badge badge-resaltado-oscuro" th:if="${animal.estado == 'Fallecido'}">
+                                        Fallecido
+                                    </span>
+                                    <span th:unless="${animal.estado == 'Fallecido'}" th:text="${animal.estado}"></span>
+                                </td>
+
+                                <!-- 3. Sexo -->
+                                <td class="align-middle text-start text-nowrap">
+                                    <span class="visually-hidden" th:text="${animal.sexo != null ? animal.sexo.etiqueta : '-'}"></span>
+                                    <div class="d-inline-flex align-items-center justify-content-start gap-2" th:if="${animal.sexo != null && (animal.sexo.name() == 'HEMBRA' || animal.sexo.name() == 'MACHO')}">
+                                        <img th:if="${animal.sexo.name() == 'HEMBRA'}"
+                                             th:src="@{/icons/hembra.svg}" alt="Icono Hembra" class="icono-animal-tabla">
+                                        <img th:if="${animal.sexo.name() == 'MACHO'}"
+                                             th:src="@{/icons/macho.svg}" alt="Icono Macho" class="icono-animal-tabla">
+                                        <span th:text="${animal.sexo.etiqueta}"></span>
+                                    </div>
+                                    <span th:if="${animal.sexo == null || (animal.sexo.name() != 'HEMBRA' && animal.sexo.name() != 'MACHO')}" class="text-muted">-</span>
+                                </td>
+
+                                <!-- 4. Tamaño -->
+                                <td class="align-middle" th:text="${animal.tamano != null ? animal.tamano.etiqueta : ''}"></td>
+
+                                <!-- 5. Edad -->
+                                <td class="align-middle"
+                                    th:text="${animal.estado == 'Fallecido' ? '-' : (animal.edad != null ? (animal.edad < 1 ? 'Cachorro' :(animal.edad == 1 ? '1 año' : animal.edad + ' años')) : '')}">
+                                </td>
+
+                                <!-- 6. Esterilizado -->
+                                <td class="align-middle text-center text-nowrap">
+                                    <span class="visually-hidden" th:text="${animal.esterilizado == true ? 'Sí' : (animal.esterilizado == false ? 'No' : ' - ')}"></span>
+                                    <div th:if="${animal.esterilizado != null}">
+                                        <img th:if="${animal.esterilizado == true}"
+                                             th:src="@{/icons/check.svg}" alt="Icono Sí" class="icono-animal-tabla-mini">
+                                        <img th:if="${animal.esterilizado == false}"
+                                             th:src="@{/icons/cross.svg}" alt="Icono No" class="icono-animal-tabla-mini">
+                                    </div>
+                                    <span th:if="${animal.esterilizado == null}" class="text-muted">-</span>
+                                </td>
+
+                                <!-- 7. Especie -->
+                                <td class="align-middle" th:text="${animal.especie}"></td>
+
+                                <!-- 8. PPP -->
+                                <td class="align-middle text-center">
+                                    <div th:if="${animal.ppp != null}" class="d-flex justify-content-center">
+                                        <span class="badge"
+                                              th:classappend="${animal.ppp} ? 'badge-naranja' : 'badge-suave'"
+                                              th:text="${animal.ppp} ? 'Sí' : 'No'"></span>
+                                    </div>
+                                    <span th:if="${animal.ppp == null}" class="text-muted">-</span>
+                                </td>
+
+                                <!-- 9. Urgente -->
+                                <td class="align-middle text-center">
+                                    <div class="d-flex justify-content-center">
+                                        <span class="badge"
+                                              th:classappend="${animal.urgente} ? 'badge-resaltado' : 'badge-suave'"
+                                              th:text="${animal.urgente} ? 'Sí' : 'No'"></span>
+                                    </div>
+                                </td>
+
+                                <!-- 10. Situación -->
+                                <td class="align-middle">
+                                    <!-- Si está fallecido, se muestra un guion -->
+                                    <span th:if="${animal.situacion == 'Fallecido'}"
+                                          class="text-muted">-</span>
+
+                                    <!-- Para el resto de situaciones se muestra su badge -->
+                                    <span th:unless="${animal.situacion == 'Fallecido'}"
+                                          th:if="${animal.situacion != null
+                                              and !#strings.isEmpty(#strings.trim(animal.situacion))
+                                              and #strings.trim(animal.situacion) != '-'}"
+                                          class="badge"
+                                          th:classappend="${animal.situacion == 'Disponible' ? 'badge-verde' :
+                                            animal.situacion == 'Solicitado' ? 'badge-azul' :
+                                            (animal.situacion == 'En revisión de adopción' or animal.situacion == 'En revisión de acogida') ? 'badge-violeta' :
+                                            (animal.situacion == 'En trámite de adopción' or animal.situacion == 'En trámite de acogida') ? 'badge-amarillo' :
+                                            animal.situacion == 'En acogida' ? 'badge-rosa' :
+                                            animal.situacion == 'Adoptado' ? 'badge-turquesa' :
+                                            animal.situacion == 'No disponible' ? 'badge-suave' :
+                                            'badge-resaltado-oscuro'}"
+                                          th:text="${animal.situacion}">
+                                    </span>
+
+                                    <!-- Si no hay situación informada -->
+                                    <span th:if="${animal.situacion == null or #strings.isEmpty(#strings.trim(animal.situacion))}"
+                                          class="text-muted">-</span>
+                                </td>
+
+                                <!-- 11. Acciones -->
+                                <td class="align-middle text-nowrap text-center">
+                                    <div class="d-inline-flex align-items-center justify-content-center gap-1">
+                                        <a th:href="@{/animales/{id}(id=${animal.id})}"
+                                           class="btn btn-sm botones-accion border-0 d-inline-flex align-items-center justify-content-center p-2 lh-1"
+                                           th:title="'Ver ficha de ' + ${animal.nombre}"
+                                           th:aria-label="'Ver ficha de ' + ${animal.nombre}">
+                                            <img th:src="@{/icons/ver_ficha.svg}" alt="Ver ficha" aria-hidden="true" class="icono-animal-tabla opacity-75">
+                                        </a>
+                                        <a th:href="@{/animales/{id}/editar(id=${animal.id})}"
+                                           class="btn btn-sm botones-accion border-0 d-inline-flex align-items-center justify-content-center p-2 lh-1"
+                                           th:title="'Editar ' + ${animal.nombre}"
+                                           th:aria-label="'Editar ' + ${animal.nombre}">
+                                            <img th:src="@{/icons/editar.svg}" alt="Editar" aria-hidden="true" class="icono-animal-tabla opacity-75">
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <footer></footer>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/webjars/simple-datatables/10.2.0/dist/umd/simple-datatables.js}"></script>
+<script th:src="@{/js/datatable-config.js}"></script>
+<script th:src="@{/js/animales-admin.js}"></script>
+<script th:src="@{/js/filtros-admin.js}"></script>
+<script th:src="@{/js/estadisticas-admin.js}"></script>
+
+</body>
+</html>

@@ -6,8 +6,9 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-@Table(name="pais")
+@Table(name = "pais")
 @Entity
 public class Pais {
 
@@ -15,7 +16,7 @@ public class Pais {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name= "codigo_pais", unique = true, nullable = false, length = 2)
+    @Column(name = "codigo_pais", unique = true, nullable = false, length = 2)
     private String codigoPais;
 
     @Column(nullable = false, length = 100)

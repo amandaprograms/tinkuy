@@ -1,0 +1,75 @@
+<div th:fragment="movil">
+
+    <nav class="navbar navbar-light border-bottom d-md-none menu-admin px-3 py-2 fixed-top">
+        <div class="container-fluid p-0 d-flex align-items-center justify-content-between">
+
+            <button class="btn border-0 p-1 bg-light rounded" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuMovil" aria-controls="menuMovil">
+                <i class="bi bi-list fs-3 text-dark"></i>
+            </button>
+
+            <a class="navbar-brand m-0 p-0" th:href="@{/}">
+                <img th:src="@{/images/logotipo_imagen_texto_med_transparente.svg}" alt="Logotipo">
+            </a>
+        </div>
+    </nav>
+
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="menuMovil" aria-labelledby="menuMovilLabel">
+        <div class="offcanvas-header border-0">
+            <a class="navbar-brand m-0 p-0" th:href="@{/}">
+                <img th:src="@{/images/logotipo_imagen_texto_med_transparente.svg}" alt="Logotipo">
+            </a>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column p-3 pt-2">
+            <div th:replace="~{fragments/adminMenu :: contenidoMenu}"></div>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="contenidoMenu">
+
+    <hr class="linea-degradado my-3">
+
+    <ul class="navbar-nav d-flex flex-column gap-2 w-100">
+        <li class="nav-item d-flex align-items-center ps-2 p-1 fondo-item-menu" th:classappend="${seccionActiva == 'inicio'} ? 'fondo-selec-item-menu' : ''">
+            <img class="icono-menu me-2" th:src="@{/icons/inicio.svg}" alt="Inicio">
+            <a class="nav-link p-0" th:href="@{/}">Inicio</a>
+        </li>
+        <li class="nav-item d-flex align-items-center ps-2 p-1 fondo-item-menu" th:classappend="${seccionActiva == 'animales'} ? 'fondo-selec-item-menu' : ''">
+            <img class="icono-menu me-2" th:src="@{/icons/animales.svg}" alt="Animales">
+            <a class="nav-link p-0" th:href="@{/}">Animales</a>
+        </li>
+        <li class="nav-item d-flex align-items-center ps-2 p-1 fondo-item-menu" th:classappend="${seccionActiva == 'solicitudes'} ? 'fondo-selec-item-menu' : ''">
+            <img class="icono-menu me-2" th:src="@{/icons/solicitudes.svg}" alt="Solicitudes">
+            <a class="nav-link p-0" th:href="@{/}">Solicitudes</a>
+        </li>
+        <li class="nav-item d-flex align-items-center ps-2 p-1 fondo-item-menu" th:classappend="${seccionActiva == 'personas'} ? 'fondo-selec-item-menu' : ''">
+            <img class="icono-menu me-2" th:src="@{/icons/personas.svg}" alt="Personas">
+            <a class="nav-link p-0" th:href="@{/}">Personas</a>
+        </li>
+        <li class="nav-item d-flex align-items-center ps-2 p-1 fondo-item-menu" th:classappend="${seccionActiva == 'usuarios'} ? 'fondo-selec-item-menu' : ''">
+            <img class="icono-menu me-2" th:src="@{/icons/usuarios.svg}" alt="Usuarios">
+            <a class="nav-link p-0" th:href="@{/}">Usuarios</a>
+        </li>
+        <li class="nav-item d-flex align-items-center ps-2 p-1 fondo-item-menu" th:classappend="${seccionActiva == 'anuncios'} ? 'fondo-selec-item-menu' : ''">
+            <img class="icono-menu me-2" th:src="@{/icons/anuncios.svg}" alt="Anuncios">
+            <a class="nav-link p-0" th:href="@{/}">Anuncios</a>
+        </li>
+    </ul>
+
+    <hr class="linea-degradado my-3">
+
+    <div class="d-flex align-items-center gap-2 mt-auto pt-2">
+        <img class="rounded-circle border border-secondary" th:src="@{/images/logotipo_imagen.svg}" alt="Usuario" width="40" height="40">
+        <span class="text-truncate">Usuario</span>
+    </div>
+</div>
+
+<aside th:fragment="menu" class="h-100 d-flex flex-column p-3 menu-admin">
+    <div class="mb-3">
+        <a class="navbar-brand w-100" th:href="@{/}">
+            <img class="img-fluid w-100" th:src="@{/images/logotipo_imagen_texto_med_transparente.svg}" alt="Logotipo">
+        </a>
+    </div>
+    <div th:replace="~{fragments/adminMenu :: contenidoMenu}"></div>
+</aside>
