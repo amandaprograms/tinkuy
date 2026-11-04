@@ -1,6 +1,6 @@
 package com.protectora.tinkuy.entities;
 
-import com.protectora.tinkuy.enumerations.TipoDocumentoCuestionario;
+import com.protectora.tinkuy.enumerations.TipoDocumentoCuestionarioEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,14 +9,18 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(of = "solicitud")
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 @ToString(exclude = "solicitud")
-@IdClass(DocumentoCuestionarioId.class)
 @Table(name = "documento_cuestionario")
 @Entity
-public class DocumentoCuestionario {
+public class CuestionarioCompletoDocumento {
 
     @Id
+    @Column(name = "solicitud_id")
+    private Long id;
+
+    @MapsId
     @ManyToOne(optional = false)
     @JoinColumn(name = "solicitud_id", nullable = false)
     private Solicitud solicitud;
@@ -32,5 +36,5 @@ public class DocumentoCuestionario {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 15)
-    private TipoDocumentoCuestionario tipo;
+    private TipoDocumentoCuestionarioEnum tipo;
 }

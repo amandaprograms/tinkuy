@@ -1,5 +1,6 @@
 package com.protectora.tinkuy.entities;
 
+import com.protectora.tinkuy.enumerations.EstadoCandidaturaAnimalEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,13 +9,15 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 @ToString(exclude = {"solicitud", "animal"})
-@Table(name = "solicitud_animal")
+@Table(name = "candidatura_animal")
 @Entity
-public class SolicitudAnimal {
+public class CandidaturaAnimal {
 
     @EmbeddedId
-    private SolicitudAnimalId id = new SolicitudAnimalId();
+    private CandidaturaAnimalId id = new CandidaturaAnimalId();
 
     @MapsId("solicitudId")
     @ManyToOne(optional = false)
@@ -26,14 +29,14 @@ public class SolicitudAnimal {
     @JoinColumn(name = "animal_id", nullable = false)
     private Animal animal;
 
-//    @Column(name = "fecha_seleccionado", nullable = false)
-//    private LocalDateTime fechaSeleccionado;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 15)
+    private EstadoCandidaturaAnimalEnum estado;
 
-    @Column(name = "fecha_descartado")
-    private LocalDateTime fechaDescartado;
+    @Column(name = "fecha_respuesta")
+    private LocalDateTime fechaRespuesta;
 
     @Lob
     @Column(name = "motivo_descarte")
     private String motivoDescarte;
-
 }

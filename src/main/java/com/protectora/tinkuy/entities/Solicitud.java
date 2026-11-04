@@ -1,8 +1,8 @@
 package com.protectora.tinkuy.entities;
 
-import com.protectora.tinkuy.enumerations.EstadoSolicitud;
-import com.protectora.tinkuy.enumerations.PrioridadSolicitud;
-import com.protectora.tinkuy.enumerations.TipoSolicitud;
+import com.protectora.tinkuy.enumerations.EstadoSolicitudEnum;
+import com.protectora.tinkuy.enumerations.PrioridadSolicitudEnum;
+import com.protectora.tinkuy.enumerations.TipoSolicitudEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,9 +11,10 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 @ToString(exclude = {"persona", "usuarioResolucion", "usuarioCancelacion"})
-@Table(name="solicitud")
+@Table(name = "solicitud")
 @Entity
 public class Solicitud {
 
@@ -23,18 +24,18 @@ public class Solicitud {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
-    private TipoSolicitud tipo;
+    private TipoSolicitudEnum tipo;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 15)
-    private PrioridadSolicitud prioridad;
+    private PrioridadSolicitudEnum prioridad;
 
     @Column(name = "fecha_solicitud", nullable = false)
     private LocalDateTime fechaSolicitud;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 15)
-    private EstadoSolicitud estado;
+    @Column(nullable = false, length = 30)
+    private EstadoSolicitudEnum estado;
 
     @Column(name = "fecha_resolucion")
     private LocalDateTime fechaResolucion;
@@ -67,6 +68,6 @@ public class Solicitud {
     private Usuario usuarioResolucion;
 
     @ManyToOne
-    @JoinColumn(name= "usuario_cancelacion_id")
+    @JoinColumn(name = "usuario_cancelacion_id")
     private Usuario usuarioCancelacion;
 }

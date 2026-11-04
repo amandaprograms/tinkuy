@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class SolicitudAnimalId implements Serializable {
+public class CandidaturaAnimalId implements Serializable {
 
     @Column(name = "solicitud_id")
     private Long solicitudId;
@@ -21,7 +21,7 @@ public class SolicitudAnimalId implements Serializable {
     @Column(name = "animal_id")
     private Long animalId;
 
-    @Column(name = "fecha_seleccionado")
-    private LocalDateTime fechaSeleccionado;
+    @Column(name = "fecha_propuesta")
+    private LocalDateTime fechaPropuesta;
 
 }

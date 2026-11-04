@@ -1,6 +1,6 @@
 package com.protectora.tinkuy.entities;
 
-import com.protectora.tinkuy.enumerations.TipoDocumentoAcogida;
+import com.protectora.tinkuy.enumerations.TipoDocumentoAcogidaEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @ToString(exclude = "estanciaAnimal")
-@Table(name="documento_acogida")
+@Table(name = "documento_acogida")
 @Entity
 public class DocumentoAcogida extends DocumentoVinculante {
 
@@ -21,7 +21,7 @@ public class DocumentoAcogida extends DocumentoVinculante {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
-    private TipoDocumentoAcogida tipo;
+    private TipoDocumentoAcogidaEnum tipo;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "estancia_animal_id", nullable = false)

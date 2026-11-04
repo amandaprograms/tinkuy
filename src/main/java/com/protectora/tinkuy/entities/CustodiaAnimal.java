@@ -8,9 +8,10 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 @ToString(exclude = {"animal", "persona", "solicitud"})
-@Table(name="custodia_animal")
+@Table(name = "custodia_animal")
 @Entity
 public class CustodiaAnimal {
 

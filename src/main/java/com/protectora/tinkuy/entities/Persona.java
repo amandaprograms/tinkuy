@@ -8,9 +8,10 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 @ToString
-@Table(name="persona")
+@Table(name = "persona")
 @Entity
 public class Persona {
 
@@ -27,7 +28,7 @@ public class Persona {
     @Column(name = "apellido2", length = 100)
     private String apellido2;
 
-    @Column(name="prefijo_pais", length = 5)
+    @Column(name = "prefijo_pais", length = 5)
     private String prefijoPais;
 
     @Column(length = 15)

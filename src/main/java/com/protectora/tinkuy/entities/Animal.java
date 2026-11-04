@@ -1,25 +1,24 @@
 package com.protectora.tinkuy.entities;
 
-import com.protectora.tinkuy.enumerations.EstadoSaludAnimal;
-import com.protectora.tinkuy.enumerations.SexoAnimal;
-import com.protectora.tinkuy.enumerations.TamanoAnimal;
+import com.protectora.tinkuy.enumerations.SexoAnimalEnum;
+import com.protectora.tinkuy.enumerations.TamanoAnimalEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
 
-
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 @ToString(exclude = "raza")
-@Table(name="animal")
+@Table(name = "animal")
 @Entity
 public class Animal {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(length = 100)
@@ -27,11 +26,11 @@ public class Animal {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
-    private SexoAnimal sexo;
+    private SexoAnimalEnum sexo;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
-    private TamanoAnimal tamano;
+    private TamanoAnimalEnum tamano;
 
     @Column(name = "fecha_nacimiento")
     private LocalDate fechaNacimiento;
@@ -39,15 +38,12 @@ public class Animal {
     @Column(name = "es_fecha_nac_estimada")
     private Boolean esFechaNacEstimada;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 20)
-    private EstadoSaludAnimal esterilizado;
+    private Boolean esterilizado;
 
-    @Column(name = "es_ppp", nullable = false)
-    private boolean esPpp;
+    private Boolean ppp;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name="raza_id", nullable = false)
+    @JoinColumn(name = "raza_id", nullable = false)
     private Raza raza;
 
 }

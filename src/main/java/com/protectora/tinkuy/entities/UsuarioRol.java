@@ -1,11 +1,15 @@
 package com.protectora.tinkuy.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "usuario_rol")
 @Entity
 public class UsuarioRol {
@@ -20,6 +24,6 @@ public class UsuarioRol {
 
     @MapsId("rolId")
     @ManyToOne(optional = false)
-    @JoinColumn(name="rol_id", nullable = false)
+    @JoinColumn(name = "rol_id", nullable = false)
     private Rol rol;
 }

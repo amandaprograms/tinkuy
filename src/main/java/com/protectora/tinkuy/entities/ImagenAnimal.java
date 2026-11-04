@@ -6,6 +6,7 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 @ToString(exclude = "animal")
 @Table(name="imagen_animal", uniqueConstraints = { @UniqueConstraint(name = "uk_imagen_animal_orden", columnNames = {"animal_id", "orden"})})

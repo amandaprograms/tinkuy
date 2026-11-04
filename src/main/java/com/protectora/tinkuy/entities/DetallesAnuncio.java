@@ -1,6 +1,6 @@
 package com.protectora.tinkuy.entities;
 
-import com.protectora.tinkuy.enumerations.EstadoAnuncio;
+import com.protectora.tinkuy.enumerations.EstadoAnuncioEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,17 +9,16 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(of = "solicitud")
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 @ToString(exclude = {"solicitud", "animal"})
-@IdClass(DetallesAnuncioId.class)
 @Table(name = "detalles_anuncio")
 @Entity
 public class DetallesAnuncio {
 
     @Id
-    @ManyToOne
-    @JoinColumn(name = "solicitud_id")
-    private Solicitud solicitud;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "fecha_publicacion", nullable = false)
     private LocalDateTime fechaPublicacion;
@@ -29,7 +28,7 @@ public class DetallesAnuncio {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 15)
-    private EstadoAnuncio estado;
+    private EstadoAnuncioEnum estado;
 
     @Column(name = "es_perdida_interna", nullable = false)
     private boolean esPerdidaInterna;
@@ -49,5 +48,9 @@ public class DetallesAnuncio {
     @ManyToOne(optional = false)
     @JoinColumn(name = "animal_id", nullable = false)
     private Animal animal;
+
+    @ManyToOne
+    @JoinColumn(name = "solicitud_id")
+    private Solicitud solicitud;
 
 }

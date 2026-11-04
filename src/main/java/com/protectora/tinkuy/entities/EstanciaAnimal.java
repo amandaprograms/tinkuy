@@ -1,6 +1,6 @@
 package com.protectora.tinkuy.entities;
 
-import com.protectora.tinkuy.enumerations.TipoEstancia;
+import com.protectora.tinkuy.enumerations.TipoEstanciaEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,9 +9,10 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 @ToString(exclude = {"animal", "persona"})
-@Table(name="estancia_animal")
+@Table(name = "estancia_animal")
 @Entity
 public class EstanciaAnimal {
 
@@ -21,9 +22,9 @@ public class EstanciaAnimal {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
-    private TipoEstancia tipo;
+    private TipoEstanciaEnum tipo;
 
-    @Column(name= "fecha_inicio", nullable = false)
+    @Column(name = "fecha_inicio", nullable = false)
     private LocalDateTime fechaInicio;
 
     @Column(name = "fecha_fin")

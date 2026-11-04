@@ -1,22 +1,26 @@
 package com.protectora.tinkuy.entities;
 
-import com.protectora.tinkuy.enumerations.TipoVivienda;
+import com.protectora.tinkuy.enumerations.TipoViviendaEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(of = "solicitud")
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 @ToString(exclude = "solicitud")
-@IdClass(CuestionarioHogarId.class)
-@Table(name="cuestionario_hogar")
+@Table(name = "cuestionario_hogar")
 @Entity
-public class CuestionarioHogar {
+public class CuestionarioOnlineInicial {
 
     @Id
+    @Column(name = "solicitud_id")
+    private Long id;
+
+    @MapsId
     @ManyToOne(optional = false)
-    @JoinColumn(name =  "solicitud_id", nullable = false)
+    @JoinColumn(name = "solicitud_id", nullable = false)
     private Solicitud solicitud;
 
     @Column(name = "num_ninos_menos_6_anios", nullable = false)
@@ -36,7 +40,7 @@ public class CuestionarioHogar {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_vivienda", nullable = false, length = 20)
-    private TipoVivienda tipoVivienda;
+    private TipoViviendaEnum tipoViviendaEnum;
 
     @Column(name = "dispone_licencia_ppp", nullable = false)
     private boolean disponeLicenciaPpp;

@@ -1,8 +1,6 @@
 package com.protectora.tinkuy.entities;
 
-import com.protectora.tinkuy.enumerations.Compatibilidad;
-import com.protectora.tinkuy.enumerations.EstadoSaludAnimal;
-import com.protectora.tinkuy.enumerations.MotivoUrgencia;
+import com.protectora.tinkuy.enumerations.MotivoUrgenciaEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,16 +10,20 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(of = "animal")
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 @ToString(exclude = "animal")
-@IdClass(FichaAnimalCompletaId.class)
-@Table(name="ficha_animal_completa")
+@Table(name = "ficha_animal_completa")
 @Entity
 public class FichaAnimalCompleta {
 
     @Id
+    @Column(name = "animal_id")
+    private Long id;
+
+    @MapsId
     @ManyToOne(optional = false)
-    @JoinColumn(name="animal_id", nullable = false)
+    @JoinColumn(name = "animal_id", nullable = false)
     private Animal animal;
 
     @Column(name = "num_microchip", unique = true, length = 15)
@@ -34,7 +36,7 @@ public class FichaAnimalCompleta {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "motivo_urgencia", length = 30)
-    private MotivoUrgencia motivoUrgencia;
+    private MotivoUrgenciaEnum motivoUrgenciaEnum;
 
     @Lob
     @Column(name = "detalle_urgencia")
@@ -50,28 +52,28 @@ public class FichaAnimalCompleta {
     @Column(name = "historia")
     private String historia;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "desparasitado_externo", length = 15)
-    private EstadoSaludAnimal desparasitadoExterno;
+    @Column(name = "desparasitado_externo")
+    private Boolean desparasitadoExterno;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "desparasitado_interno", length = 15)
-    private EstadoSaludAnimal desparasitadoInterno;
+    @Column(name = "desparasitado_interno")
+    private Boolean desparasitadoInterno;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "vacunas_al_dia", length = 15)
-    private EstadoSaludAnimal vacunasAlDia;
+    @Column(name = "vacunas_al_dia")
+    private Boolean vacunasAlDia;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "compatibilidad_perros", length = 15)
-    private Compatibilidad compatibilidadPerros;
+    @Column(name = "compatibilidad_perros")
+    private Boolean compatibilidadEnumPerros;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "compatibilidad_gatos", length = 15)
-    private Compatibilidad compatibilidadGatos;
+    @Column(name = "compatibilidad_gatos")
+    private Boolean compatibilidadEnumGatos;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "compatibilidad_ninos", length = 15)
-    private Compatibilidad compatibilidadNinos;
+    @Column(name = "compatibilidad_ninos")
+    private Boolean compatibilidadEnumNinos;
+
+    @Column(name = "disponible_adopcion")
+    private boolean disponibleAdopcion;
+
+    @Column(name = "disponible_acogida")
+    private boolean disponibleAcogida;
 
 }

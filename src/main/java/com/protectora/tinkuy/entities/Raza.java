@@ -6,8 +6,9 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-@Table(name="raza", uniqueConstraints = { @UniqueConstraint(name = "uk_raza_especie_nombre", columnNames = {"especie_id", "nombre"})})
+@Table(name = "raza", uniqueConstraints = {@UniqueConstraint(name = "uk_raza_especie_nombre", columnNames = {"especie_id", "nombre"})})
 @Entity
 public class Raza {
 
